@@ -7,16 +7,14 @@ import jakarta.persistence.*
 @Table(name = "users")
 @Entity
 data class User(
-    // Marca o campo id como a chave primária da entidade.
-    // A geração automática do valor do id é gerenciada pelo banco de dados.
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true)
-    val id: Long? = null, // O id pode ser nulo inicialmente antes de ser atribuído pelo banco de dados.
+    val id: Long? = null,
 
-    // Define a coluna "name" na tabela, onde será armazenado o nome do usuário.
     @Column(name = "name")
-    var name: String, // O nome do usuário é uma string não nula.
+    var name: String,
 
     @Column(name = "email")
     var email:String,

@@ -6,13 +6,14 @@ import com.api_vendinha.api.domain.dtos.response.ProdutoResponseDto
 import com.api_vendinha.api.domain.dtos.response.UserResponseDto
 import com.api_vendinha.api.domain.service.ProdutoServiceInterface
 import com.api_vendinha.api.domain.service.UserServiceInterface
+import com.api_vendinha.api.infrastructure.repository.ProdutoRepository
 import org.springframework.web.bind.annotation.*
 
 
 @RestController
-@RequestMapping("/prodtudo")
+@RequestMapping("/produto")
 class ProdutoController (
-    val produtoServiceInterface: ProdutoServiceInterface
+    val produtoServiceInterface: ProdutoServiceInterface,
 ) {
 
     @PostMapping("/save")

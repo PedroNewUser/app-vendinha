@@ -1,19 +1,16 @@
-package com.api_vendinha.api.domain.service
+package com.api_vendinha.api.domain.service.impl
 
 import com.api_vendinha.api.domain.dtos.request.PodutoRequestDto
-import com.api_vendinha.api.domain.dtos.request.UserRequestDto
 import com.api_vendinha.api.domain.dtos.response.ProdutoResponseDto
 import com.api_vendinha.api.domain.dtos.response.UserResponseDto
 import com.api_vendinha.api.domain.entities.Produto
-import com.api_vendinha.api.domain.entities.User
+import com.api_vendinha.api.domain.service.ProdutoServiceInterface
 import com.api_vendinha.api.infrastructure.repository.ProdutoRepository
 import com.api_vendinha.api.infrastructure.repository.UserRepository
 import org.springframework.stereotype.Service
 
-// Marca a classe como um componente de serviço do Spring, o que permite que o Spring a gerencie e a injete em outros componentes.
 @Service
 class ProdutoServiceImpl (
-    // Injeção de dependência do repositório de usuários. O repositório é usado para acessar e manipular dados no banco de dados.
     private val produtoRepository: ProdutoRepository,
     private val userRepository: UserRepository
 ): ProdutoServiceInterface {
@@ -23,6 +20,7 @@ class ProdutoServiceImpl (
 
         val  produto = produtoRepository.save(
             Produto(
+                name = podutoRequestDto.name,
                 preco = podutoRequestDto.preco,
                 quantidade = podutoRequestDto.quantidade,
                 user = user
@@ -31,6 +29,7 @@ class ProdutoServiceImpl (
 
         return  ProdutoResponseDto(
             id = produto.id,
+            name=produto.name,
             preco = produto.preco,
             quantidade = produto.quantidade,
             user = UserResponseDto(
@@ -43,4 +42,5 @@ class ProdutoServiceImpl (
             )
         )
     }
+
 }

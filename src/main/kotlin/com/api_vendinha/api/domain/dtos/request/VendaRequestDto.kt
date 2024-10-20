@@ -1,8 +1,8 @@
 package com.api_vendinha.api.domain.dtos.request
 
-data class PodutoRequestDto(
-    val name: String,
+data class VendaRequestDto(
     val preco: Float,
     val quantidade: Long,
-    val user: Long,
+    val product_id: Long,
+    val user_id: Long
 )
