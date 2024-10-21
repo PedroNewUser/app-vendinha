@@ -15,7 +15,7 @@ class VendaServiceImpl (
         val idProduto = vendaRepository.findById(vendaRequestDto.product_id)
         if (vendaRequestDto.product_id.toString() == idProduto.toString()) {
             if (vendaRequestDto.quantidade < vendaRepository.findByQuantidade(vendaRequestDto.quantidade)) {
-                val users = produtoRepository.comprar(vendaRequestDto.product_id, vendaRequestDto.quantidade)
+                produtoRepository.comprar(vendaRequestDto.product_id, vendaRequestDto.quantidade)
             } else {
                 println("Quantidade errada!")
             }

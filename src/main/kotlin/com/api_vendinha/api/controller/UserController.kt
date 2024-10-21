@@ -5,17 +5,12 @@ import com.api_vendinha.api.domain.dtos.response.UserResponseDto
 import com.api_vendinha.api.domain.service.UserServiceInterface
 import org.springframework.web.bind.annotation.*
 
-// Marca a classe como um controlador REST do Spring, que irá lidar com requisições HTTP e retornar respostas diretamente no corpo da resposta.
 @RestController
-// Define o caminho base para todos os endpoints dentro deste controlador. Neste caso, todos os endpoints começam com "/user".
 @RequestMapping("/user")
 class UserController (
-    // Injeção de dependência do serviço de usuário. O controlador usa este serviço para processar dados relacionados a usuários.
     val userService: UserServiceInterface
 ) {
-    // Mapeia este método para responder a requisições POST no caminho "/user/save".
     @PostMapping("/save")
-    // O método recebe um objeto `UserRequestDto` no corpo da requisição, e retorna um objeto `UserResponseDto` após chamar o serviço para salvar o usuário.
     fun save(@RequestBody userRequestDto: UserRequestDto) : UserResponseDto {
         // Chama o método `save` do serviço de usuário passando o DTO recebido e retorna o resultado.
         return userService.save(userRequestDto)

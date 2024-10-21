@@ -1,8 +1,6 @@
 package com.api_vendinha.api.infrastructure.repository
 
-import com.api_vendinha.api.domain.dtos.response.ProdutoResponseDto
 import com.api_vendinha.api.domain.entities.Produto
-import com.api_vendinha.api.domain.entities.User
 import jakarta.transaction.Transactional
 import org.springframework.data.jpa.repository.Modifying
 import org.springframework.data.jpa.repository.Query
@@ -16,8 +14,12 @@ interface ProdutoRepository : CrudRepository<Produto, Long>{
 
     @Modifying
     @Transactional
-    @Query("UPDATE Produto AS p INNER JOIN Vendas AS v ON p.id = v.product_id" +
-            "SET p.quantidade  = p.quantidade - :quantidade WHERE p.id = v.product_id;")
+    @Query("UPDATE Produto AS p SET p.quantidade  = p.quantidade - :quantidade WHERE p.product_id = :product_id")
     fun comprar(@Param("product_id") product_id:Long ,@Param("quantidade") quantidade:Long)
 
 }
+
+//"UPDATE Produto AS p SET p.quantidade  = p.quantidade - :quantidade WHERE p.name = :name"
+
+//"UPDATE Produto AS p INNER JOIN Vendas AS v ON p.id = v.product_id" +
+//"SET p.quantidade  = p.quantidade - :quantidade WHERE p.id = v.product_id;"
