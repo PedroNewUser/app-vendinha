@@ -6,5 +6,4 @@ data class ProdutoResponseDto(
     val name: String,
     val preco: Float,
     val quantidade: Long,
-    val user: UserResponseDto
 )
