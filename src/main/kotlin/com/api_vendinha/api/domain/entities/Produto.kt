@@ -12,7 +12,7 @@ data class Produto (
     val id: Long? = null,
 
     @Column(name = "name")
-    val name: String,
+    var name: String,
 
     @Column(name = "preco")
     var preco: Float,
