@@ -1,8 +1,8 @@
 package com.api_vendinha.api.controller
 
+import com.api_vendinha.api.domain.dtos.request.ProductRequestDtoCompra
 import com.api_vendinha.api.domain.dtos.request.ProdutoRequestDto
 import com.api_vendinha.api.domain.dtos.response.ProdutoResponseDto
-import com.api_vendinha.api.domain.dtos.response.ProdutoResponseDtoLista
 import com.api_vendinha.api.domain.service.ProdutoServiceInterface
 import org.springframework.web.bind.annotation.*
 
@@ -19,7 +19,7 @@ class ProdutoController (
     }
 
     @GetMapping("/list")
-    fun getAllProduct(): List<ProdutoResponseDtoLista> {
+    fun getAllProduct(): List<ProdutoResponseDto> {
         return produtoServiceInterface.listProduct()
     }
 
@@ -29,5 +29,17 @@ class ProdutoController (
         @RequestBody productRequestDto: ProdutoRequestDto
     ):ProdutoResponseDto{
         return produtoServiceInterface.update(id, productRequestDto)
+    }
+
+    //Comprar Produto
+    @PostMapping("/comprar")
+    fun comprarProduto(@RequestBody productRequestDtoCompra: ProductRequestDtoCompra){
+        return produtoServiceInterface.comprar(productRequestDtoCompra)
+    }
+
+    //Listar Vendas
+    @GetMapping("/list/vendas")
+    fun listarVenda():List<ProdutoResponseDto>{
+        return produtoServiceInterface.listProductVenda()
     }
 }

@@ -1,18 +1,19 @@
 package com.api_vendinha.api.domain.service.impl
 
+import com.api_vendinha.api.domain.dtos.request.ProductRequestDtoCompra
 import com.api_vendinha.api.domain.dtos.request.ProdutoRequestDto
 import com.api_vendinha.api.domain.dtos.response.ProdutoResponseDto
-import com.api_vendinha.api.domain.dtos.response.ProdutoResponseDtoLista
 import com.api_vendinha.api.domain.entities.Produto
+import com.api_vendinha.api.domain.entities.Venda
 import com.api_vendinha.api.domain.service.ProdutoServiceInterface
 import com.api_vendinha.api.infrastructure.repository.ProdutoRepository
-import com.api_vendinha.api.infrastructure.repository.UserRepository
+import com.api_vendinha.api.infrastructure.repository.VendaRepository
 import org.springframework.stereotype.Service
 
 @Service
 class ProdutoServiceImpl (
     private val produtoRepository: ProdutoRepository,
-    private val userRepository: UserRepository
+    private val vendaRepository: VendaRepository
 ): ProdutoServiceInterface {
     override fun save(produtoRequestDto: ProdutoRequestDto): ProdutoResponseDto {
 
@@ -53,16 +54,46 @@ class ProdutoServiceImpl (
         )
     }
 
-    override fun listProduct(): List<ProdutoResponseDtoLista> {
+    override fun listProduct(): List<ProdutoResponseDto> {
         val produto = produtoRepository.findAll()
 
         return produto.map {
-            ProdutoResponseDtoLista(
+            ProdutoResponseDto(
                 id = it.id,
                 name = it.name,
                 quantidade = it.quantidade,
                 preco = it.preco
             )
+        }
+    }
+
+    override fun listProductVenda(): List<ProdutoResponseDto> {
+
+        val vendas = vendaRepository.findAll()
+
+        return vendas.map {
+            ProdutoResponseDto(
+                id = it.id,
+                name = it.name,
+                quantidade = it.quantidade,
+                preco = it.preco
+            )
+        }
+    }
+
+    override fun comprar(productRequestDtoCompra: ProductRequestDtoCompra) {
+
+        vendaRepository.save(
+            Venda(
+                id = productRequestDtoCompra.id,
+                name = productRequestDtoCompra.name,
+                preco = productRequestDtoCompra.preco,
+                quantidade = productRequestDtoCompra.quantidade,
+            )
+        )
+
+        if (productRequestDtoCompra.name == produtoRepository.findByName(productRequestDtoCompra.name)) {
+            produtoRepository.deleteById(productRequestDtoCompra.id)
         }
     }
 

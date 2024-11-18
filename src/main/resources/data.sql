@@ -19,6 +19,6 @@ create table venda(
     id integer primary key auto_increment,
     preco FLOAT,
     quantidade integer,
-    product_id INTEGER REFERENCES produtos (id),
-    USER_ID INTEGER REFERENCES USERS (id)
+    product_id INTEGER REFERENCES produtos (id)
+--    USER_ID INTEGER REFERENCES USERS (id)
 );

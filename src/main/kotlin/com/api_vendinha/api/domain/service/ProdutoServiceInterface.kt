@@ -1,13 +1,16 @@
 package com.api_vendinha.api.domain.service
 
+import com.api_vendinha.api.domain.dtos.request.ProductRequestDtoCompra
 import com.api_vendinha.api.domain.dtos.request.ProdutoRequestDto
 import com.api_vendinha.api.domain.dtos.response.ProdutoResponseDto
-import com.api_vendinha.api.domain.dtos.response.ProdutoResponseDtoLista
 
 interface ProdutoServiceInterface {
     fun save(produtoRequestDto: ProdutoRequestDto): ProdutoResponseDto
     fun update(id: Long, productRequestDto: ProdutoRequestDto): ProdutoResponseDto
 
-    fun listProduct(): List<ProdutoResponseDtoLista>
+    fun listProductVenda(): List<ProdutoResponseDto>
+    fun listProduct(): List<ProdutoResponseDto>
+
+    fun comprar(productRequestDtoCompra: ProductRequestDtoCompra)
 
 }
