@@ -3,6 +3,7 @@ package com.api_vendinha.api.domain.service
 import com.api_vendinha.api.domain.dtos.request.ProductRequestDtoCompra
 import com.api_vendinha.api.domain.dtos.request.ProdutoRequestDto
 import com.api_vendinha.api.domain.dtos.response.ProdutoResponseDto
+import com.api_vendinha.api.domain.entities.Venda
 
 interface ProdutoServiceInterface {
     fun save(produtoRequestDto: ProdutoRequestDto): ProdutoResponseDto

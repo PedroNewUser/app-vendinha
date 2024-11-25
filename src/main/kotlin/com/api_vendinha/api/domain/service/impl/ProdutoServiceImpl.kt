@@ -85,30 +85,21 @@ class ProdutoServiceImpl (
 
         val produto = produtoRepository.findById(productRequestDtoCompra.id).orElseThrow()
 
-        vendaRepository.save(
-            Venda(
-                id = produto.id,
-                name = produto.name,
-                preco = produto.preco,
-                quantidade = produto.quantidade,
-            )
-        )
-
         if (productRequestDtoCompra.id == produto.id) {
-            vendaRepository.deleteQuantidade(productRequestDtoCompra.id, productRequestDtoCompra.quantidade)
+            produtoRepository.deleteQuantidade(productRequestDtoCompra.id, productRequestDtoCompra.quantidade)
         }
 
+        val produtoCompra = produtoRepository.findById(productRequestDtoCompra.id).orElseThrow()
+
         vendaRepository.save(
             Venda(
-                id = produto.id,
-                name = produto.name,
-                preco = produto.preco,
-                quantidade = produto.quantidade,
+                id = produtoCompra.id,
+                name = produtoCompra.name,
+                preco = produtoCompra.preco,
+                quantidade = produtoCompra.quantidade
             )
         )
-//        if (produto.name == produtoRepository.findByName(produto.name)) {
-//            produtoRepository.deleteById(id)
-//        }
     }
+
 
 }

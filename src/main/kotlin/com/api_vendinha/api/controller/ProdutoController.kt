@@ -3,6 +3,7 @@ package com.api_vendinha.api.controller
 import com.api_vendinha.api.domain.dtos.request.ProductRequestDtoCompra
 import com.api_vendinha.api.domain.dtos.request.ProdutoRequestDto
 import com.api_vendinha.api.domain.dtos.response.ProdutoResponseDto
+import com.api_vendinha.api.domain.entities.Venda
 import com.api_vendinha.api.domain.service.ProdutoServiceInterface
 import org.springframework.web.bind.annotation.*
 
@@ -32,7 +33,7 @@ class ProdutoController (
     }
 
     //Comprar Produto
-    @PostMapping("/comprar/")
+    @PostMapping("/comprar")
     fun comprarProduto(@RequestBody productRequestDtoCompra: ProductRequestDtoCompra){
         return produtoServiceInterface.comprar(productRequestDtoCompra)
     }
