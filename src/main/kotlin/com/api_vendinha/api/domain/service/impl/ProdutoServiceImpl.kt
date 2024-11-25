@@ -81,9 +81,9 @@ class ProdutoServiceImpl (
         }
     }
 
-    override fun comprar(id: Long) {
+    override fun comprar(productRequestDtoCompra: ProductRequestDtoCompra) {
 
-        val produto = produtoRepository.findById(id).orElseThrow()
+        val produto = produtoRepository.findById(productRequestDtoCompra.id).orElseThrow()
 
         vendaRepository.save(
             Venda(
@@ -94,9 +94,21 @@ class ProdutoServiceImpl (
             )
         )
 
-        if (produto.name == produtoRepository.findByName(produto.name)) {
-            produtoRepository.deleteById(id)
+        if (productRequestDtoCompra.id == produto.id) {
+            vendaRepository.deleteQuantidade(productRequestDtoCompra.id, productRequestDtoCompra.quantidade)
         }
+
+        vendaRepository.save(
+            Venda(
+                id = produto.id,
+                name = produto.name,
+                preco = produto.preco,
+                quantidade = produto.quantidade,
+            )
+        )
+//        if (produto.name == produtoRepository.findByName(produto.name)) {
+//            produtoRepository.deleteById(id)
+//        }
     }
 
 }

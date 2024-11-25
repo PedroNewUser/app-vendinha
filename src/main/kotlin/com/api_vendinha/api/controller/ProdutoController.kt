@@ -1,5 +1,6 @@
 package com.api_vendinha.api.controller
 
+import com.api_vendinha.api.domain.dtos.request.ProductRequestDtoCompra
 import com.api_vendinha.api.domain.dtos.request.ProdutoRequestDto
 import com.api_vendinha.api.domain.dtos.response.ProdutoResponseDto
 import com.api_vendinha.api.domain.service.ProdutoServiceInterface
@@ -31,9 +32,9 @@ class ProdutoController (
     }
 
     //Comprar Produto
-    @PostMapping("/comprar/{id}")
-    fun comprarProduto(@PathVariable id: Long){
-        return produtoServiceInterface.comprar(id)
+    @PostMapping("/comprar/")
+    fun comprarProduto(@RequestBody productRequestDtoCompra: ProductRequestDtoCompra){
+        return produtoServiceInterface.comprar(productRequestDtoCompra)
     }
 
     //Listar Vendas

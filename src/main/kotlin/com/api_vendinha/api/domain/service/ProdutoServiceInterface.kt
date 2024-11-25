@@ -11,5 +11,5 @@ interface ProdutoServiceInterface {
     fun listProductVenda(): List<ProdutoResponseDto>
     fun listProduct(): List<ProdutoResponseDto>
 
-    fun comprar(id:Long)
+    fun comprar(productRequestDtoCompra: ProductRequestDtoCompra)
 }
